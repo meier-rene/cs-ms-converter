@@ -1,0 +1,10 @@
+in_file1:  
+    class: File
+    path: main_cwl.sh
+in_file:  
+    class: File
+    path: input_files/File014.RAW
+    format: http://edamontology.org/format_3245
+in_file2:
+    class: File
+    path: config.txt
