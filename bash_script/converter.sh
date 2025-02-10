@@ -1,8 +1,15 @@
 #!/bin/bash
 
+if [ $# -ne 2 ]; then
+    echo "Error: Please provide your input and output path in following fashion."
+    echo "Expected Command: bash converter.sh <input_path> <output_path>"
+    exit 1
+fi
+
+
 # INPUT PARAMETERS
-MAIN_FOLDER=""
-CONVERTED_FILE_PATH=""
+MAIN_FOLDER=$1
+CONVERTED_FILE_PATH=$2
 URL="https://nfdi4chem-msconverter.zih.tu-dresden.de/msconvert_convert"
 
 
