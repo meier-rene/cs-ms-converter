@@ -14,9 +14,10 @@ config_path = os.path.join(main_dir,"config.txt")
 
 
 class preparation:
-    def __init__(self, folder_name):
+    def __init__(self, folder_name, config_file_params=None):
         self.root = None
         self.folder_name =  folder_name
+        self.config_file_params = config_file_params
 
 
     def current_path(self):
@@ -49,7 +50,7 @@ class preparation:
                 # file_location = work_path
                 with open(tmp_intermediate_file, 'w') as g:
                     g.write(f'in_file1:\n    class: File\n    path: {execution_path}\n')
-                    g.write(f'in_file2:\n    class: File\n    path: {config_path}\n')
+                    g.write(f'in_file2:\n    class: File\n    path: {self.config_file_params}\n')
                     g.write('in_file:\n    class: File\n    format: http://edamontology.org/format_3245\n')
                     g.write(f'    path: {os.path.join(new_work_path, file)}')
                 print(f'The Intermediate-File for the file : {file} is COMPLETED.')
