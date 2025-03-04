@@ -39,7 +39,7 @@ if [ "$(ls -A "$MAIN_FOLDER")" ]; then
         cd $MAIN_FOLDER
         base_FILE=$(echo "$(basename "$item")" | sed -E 's/\.[Dd]$//')
         tar -cvf $MAIN_FOLDER/$(basename "$item").tar $(basename "$item")
-        curl -X 'POST'  ${URL} -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F "main_file=@$(basename "$item").tar" -o ${CONVERTED_FILE_PATH}/${base_FILE}.mzML 2>&1
+        curl -X 'POST'  ${URL} -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F "main_file=@$(basename "$item").tar" -F 'parameters= ' -o ${CONVERTED_FILE_PATH}/${base_FILE}.mzML 2>&1
         rm $MAIN_FOLDER/$(basename "$item").tar 
         cd ..
         echo "-----------------------"
@@ -60,7 +60,7 @@ if [ "$(ls -A "$MAIN_FOLDER")" ]; then
           cd $MAIN_FOLDER
           base_FILE=$(echo "$(basename "$item")" | sed -E 's/\.[Ww][Ii][Ff][Ff]$//')
           tar -cvf $MAIN_FOLDER/$(basename "$item").tar $(basename "$item") $temp_file
-          curl -X 'POST'  ${URL} -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F "main_file=@$(basename "$item").tar" -o ${CONVERTED_FILE_PATH}/${base_FILE}.mzML  2>&1 
+          curl -X 'POST'  ${URL} -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F "main_file=@$(basename "$item").tar" -F 'parameters= '  -o ${CONVERTED_FILE_PATH}/${base_FILE}.mzML  2>&1 
           rm $MAIN_FOLDER/$(basename "$item").tar
           cd ..
           echo "-----------------------"
@@ -80,7 +80,7 @@ if [ "$(ls -A "$MAIN_FOLDER")" ]; then
         FILE="${MAIN_FOLDER}/$(basename "$item")"
         base_FILE=$(echo "$(basename "$item")" | sed -E 's/\.[Rr][Aa][Ww]$//')
         #echo "$base_FILE"
-        curl -X 'POST'  ${URL} -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F "main_file=@${FILE}" -o ${CONVERTED_FILE_PATH}/${base_FILE}.mzML 2>&1
+        curl -X 'POST'  ${URL} -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F "main_file=@${FILE}" -F 'parameters= ' -o ${CONVERTED_FILE_PATH}/${base_FILE}.mzML 2>&1
         echo "-----------------------"
       else
         echo "-----------------------"
