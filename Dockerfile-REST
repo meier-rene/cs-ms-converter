@@ -1,0 +1,39 @@
+FROM ubuntu:24.04
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    docker.io \
+    nodejs \
+    python3-venv \
+    python3-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV THREAD=1
+ENV CPU=1
+
+RUN mkdir /app
+WORKDIR /app
+#RUN git clone https://git.rwth-aachen.de/linsherpa/ms_converter.git /app
+COPY . /app
+#COPY File014.RAW /app
+#WORKDIR /app
+#RUN chmod 777 -R /tmp
+
+RUN python3 -m venv /app/venv
+RUN /app/venv/bin/pip install --no-cache-dir -r requirements.txt
+ENV PATH="/app/venv/bin:$PATH"
+
+
+#RUN pip install --no-cache-dir -r requirements.txt
+
+
+
+#RUN [ "sh", "-c", " dockerd >/tmp/docker.stdout 2>/tmp/docker.stderr &" ]
+EXPOSE 5000
+#CMD ["python3", "/app/rest_api.py"]
+#CMD ["sh","-c", "echo ${THREAD}"]
+RUN chmod +x /app/start.sh
+ENTRYPOINT ["/app/start.sh"]
+CMD ["sh", "-c", "uwsgi --http-socket :5000 --master --processes ${CPU} --threads ${THREAD} -w rest_api:app --logto /app/serverlog.log"]
+#CMD ["uwsgi", "--http-socket", ":5000", "--master", "--processes", "$CPU", "--threads", "$THREAD", "-w", "rest_api:app", "--logto", "/app/serverlog.log"]
+#CMD ["uwsgi", "--http-socket", ":5000", "--master", "--processes", "4", "--threads", "4", "-w", "rest_api:app", "--logto", "/app/serverlog.log"]
