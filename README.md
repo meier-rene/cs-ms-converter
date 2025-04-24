@@ -89,13 +89,13 @@ The deployment of Kubernetes instance is done via [Helm chart](https://helm.sh/)
 <!-- ## For docker-installation
 
 - [Pulling the docker image]
-    - Step1: docker pull docker pull lincoln1010/mass_spectrometry_file_converter:v1
+    - Step 1: docker pull docker pull lincoln1010/mass_spectrometry_file_converter:v1
+
+- [Create a volume for docker in docker]
+    - Step 2: docker volume create var_lib_docker
 
 - [Running the container]
-    - Step2: docker run --privileged -d -ti --name \< name of the container \> -p 5000:5000 lincoln1010/mass_spectrometry_file_converter:v1.0
-
-- [Enabling the docker in docker (which is necessary)]
-    - Step 3: docker exec \< name of the container \> dockerd >/tmp/docker.stdout 2>/tmp/docker.stderr &
+    - Step 3: docker run --privileged -d -ti -v var_lib_docker:/var/lib/docker --name \< name of the container \> -p 5000:5000 lincoln1010/mass_spectrometry_file_converter:v1.0
 
 - [Copy extra parameters on config.txt file]
     - Step 4a : create a config.txt file with content , for example, --mzXML  (without any indentation)

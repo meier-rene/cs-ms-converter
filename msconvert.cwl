@@ -8,7 +8,7 @@ baseCommand: ["bash"]
 
 requirements:
   - class: DockerRequirement
-    dockerPull: chambm/pwiz-skyline-i-agree-to-the-vendor-licenses 
+    dockerPull: proteowizard/pwiz-skyline-i-agree-to-the-vendor-licenses
   - class: InlineJavascriptRequirement
 
 inputs:
